@@ -1,3 +1,0 @@
-[submodule "web/plugins/qgis-server-simple-browser"]
-	path = web/plugins/qgis-server-simple-browser
-	url = git@github.com:elpaso/qgis-server-simple-browser.git

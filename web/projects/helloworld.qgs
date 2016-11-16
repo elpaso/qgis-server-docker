@@ -1,6 +1,8 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis projectname="" version="2.14.0-Essen">
+<qgis projectname="" version="2.18.0">
   <title></title>
+  <autotransaction active="0"/>
+  <evaluateDefaultValues active="0"/>
   <layer-tree-group expanded="1" checked="Qt::Checked" name="">
     <customproperties/>
     <layer-tree-layer expanded="0" checked="Qt::Checked" id="world20160411143513939" name="world">
@@ -11,10 +13,10 @@
   <mapcanvas>
     <units>degrees</units>
     <extent>
-      <xmin>-188.13625592417062649</xmin>
-      <ymin>-96.35074273258294397</ymin>
-      <xmax>189.86374407582937351</xmax>
-      <ymax>85.902726917417084</ymax>
+      <xmin>-130.24568854931314377</xmin>
+      <ymin>-100.71435333872810247</ymin>
+      <xmax>247.75431145068685623</xmax>
+      <ymax>81.5391163112719255</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>0</projections>
@@ -46,12 +48,10 @@
     </legendlayer>
   </legend>
   <projectlayers>
-    <maplayer minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+    <maplayer simplifyAlgorithm="0" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" readOnly="0" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>world20160411143513939</id>
       <datasource>./world.shp</datasource>
       <shortname>world</shortname>
-      <title></title>
-      <abstract></abstract>
       <keywordList>
         <value></value>
       </keywordList>
@@ -73,24 +73,31 @@
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="NAME" expression=""/>
+        <default field="CAPITAL" expression=""/>
+        <default field="APPROX" expression=""/>
+        <default field="AREA" expression=""/>
+        <default field="SOURCETHM" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
       <edittypes>
         <edittype widgetv2type="TextEdit" name="NAME">
-          <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="CAPITAL">
-          <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="APPROX">
-          <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="AREA">
-          <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="SOURCETHM">
-          <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
       </edittypes>
       <renderer-v2 attr="NAME" forceraster="0" symbollevels="0" type="categorizedSymbol" enableorderby="0">
@@ -4135,17 +4142,49 @@
         <multilineenabled fieldname="" on=""/>
         <selectedonly on=""/>
       </labelattributes>
-      <SingleCategoryDiagramRenderer diagramType="Pie">
-        <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" sizeType="MM" minScaleDenominator="0">
+      <SingleCategoryDiagramRenderer diagramType="Pie" sizeLegend="0" attributeLegend="1">
+        <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" sizeScale="0,0,0,0,0,0" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" lineSizeScale="0,0,0,0,0,0" sizeType="MM" lineSizeType="MM" minScaleDenominator="0">
           <fontProperties description="Ubuntu,9,-1,5,50,0,0,0,0,0" style=""/>
           <attribute field="" color="#000000" label=""/>
         </DiagramCategory>
+        <symbol alpha="1" clip_to_extent="1" type="marker" name="sizeSymbol">
+          <layer pass="0" class="SimpleMarker" locked="0">
+            <prop k="angle" v="0"/>
+            <prop k="color" v="255,0,0,255"/>
+            <prop k="horizontal_anchor_point" v="1"/>
+            <prop k="joinstyle" v="bevel"/>
+            <prop k="name" v="circle"/>
+            <prop k="offset" v="0,0"/>
+            <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+            <prop k="offset_unit" v="MM"/>
+            <prop k="outline_color" v="0,0,0,255"/>
+            <prop k="outline_style" v="solid"/>
+            <prop k="outline_width" v="0"/>
+            <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
+            <prop k="outline_width_unit" v="MM"/>
+            <prop k="scale_method" v="diameter"/>
+            <prop k="size" v="2"/>
+            <prop k="size_map_unit_scale" v="0,0,0,0,0,0"/>
+            <prop k="size_unit" v="MM"/>
+            <prop k="vertical_anchor_point" v="1"/>
+          </layer>
+        </symbol>
       </SingleCategoryDiagramRenderer>
-      <DiagramLayerSettings yPosColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
+      <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>.</annotationform>
+      <aliases>
+        <alias field="NAME" index="0" name=""/>
+        <alias field="CAPITAL" index="1" name=""/>
+        <alias field="APPROX" index="2" name=""/>
+        <alias field="AREA" index="3" name=""/>
+        <alias field="SOURCETHM" index="4" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
-      <attributeactions/>
+      <attributeactions default="0"/>
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+        <columns/>
+      </attributetableconfig>
       <editform>.</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
@@ -4182,13 +4221,13 @@ def my_form_open(dialog, layer, feature):
       <variableValues type="QStringList"/>
     </Variables>
     <WMSContactPerson type="QString">Alessandro Pasotti</WMSContactPerson>
-    <WMSOnlineResource type="QString">http://localhost/cgi-bin/qgis_mapserv.fcgi?map=/web/projects/helloworld.qgs</WMSOnlineResource>
+    <WMSOnlineResource type="QString"></WMSOnlineResource>
     <WMSUseLayerIDs type="bool">false</WMSUseLayerIDs>
     <WMSContactOrganization type="QString">QGIS.org</WMSContactOrganization>
     <WMSKeywordList type="QStringList">
       <value>QGIS Server World</value>
     </WMSKeywordList>
-    <WFSUrl type="QString">http://localhost/cgi-bin/qgis_mapserv.fcgi?map=/web/projects/helloworld.qgs</WFSUrl>
+    <WFSUrl type="QString"></WFSUrl>
     <Paths>
       <Absolute type="bool">false</Absolute>
     </Paths>
@@ -4212,6 +4251,7 @@ def my_form_open(dialog, layer, feature):
       <Ellipsoid type="QString">NONE</Ellipsoid>
     </Measure>
     <WMSPrecision type="QString">8</WMSPrecision>
+    <WMSSegmentizeFeatureInfoGeometry type="bool">false</WMSSegmentizeFeatureInfoGeometry>
     <WFSTLayers>
       <Insert type="QStringList">
         <value>world20160411143513939</value>
@@ -4278,7 +4318,7 @@ def my_form_open(dialog, layer, feature):
       <DistanceUnits type="QString">meters</DistanceUnits>
       <AreaUnits type="QString">m2</AreaUnits>
     </Measurement>
-    <WMSUrl type="QString">http://localhost/cgi-bin/qgis_mapserv.fcgi?map=/web/projects/helloworld.qgs</WMSUrl>
+    <WMSUrl type="QString"></WMSUrl>
   </properties>
   <visibility-presets/>
 </qgis>

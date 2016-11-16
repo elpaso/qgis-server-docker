@@ -19,7 +19,7 @@ RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key 3FF5FFCAD71472C
 
 # Install required dependencies and QGIS itself
 RUN apt-get -y update
-RUN apt-get install -y \
+RUN apt-get install --force-yes -y \
     vim \
     python-qgis \
     qgis-server \
@@ -52,9 +52,18 @@ ENV APACHE_RUN_DIR /var/run/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_DOCUMENTROOT /web/htdocs
 
+# Setup plugins
+ADD setup.sh /usr/local/bin/setup.sh
+RUN chmod +x /usr/local/bin/setup.sh
+RUN /usr/local/bin/setup.sh
+
 # Add start script
 ADD start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh
+# Add show.cgi
+ADD show.cgi /usr/lib/cgi-bin/show.cgi
+RUN chmod +x /usr/lib/cgi-bin/show.cgi
+
 CMD /usr/local/bin/start.sh
 
 VOLUME /web

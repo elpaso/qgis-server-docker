@@ -15,6 +15,7 @@ apache reloading.
 **WFS-T** is enabled (no authentication required).
 
 *QGIS Server Browser* plugin is installed by deafult for a quick preview of layers.
+*QGIS Server OAuth* plugin is installed, see [README](https://github.com/boundlessgeo/qgis-server-oauth2-auth-plugin/blob/master/README.rst) for details
 
 
 # Building
@@ -49,6 +50,15 @@ docker run -p 8081:80 -it --name docker-qgis-server-boundless \
 Replace ``<path_to_local_web_folder>`` with an absolute path on your
 filesystem.
 
+To use the OAuth2 plugin, you must pass the configuration in the environment:
+```
+docker run -d \
+    -e OAUTH2_AUTHORIZATION_SERVICE_PROVIDER=twitter \
+    -e OAUTH2_CLIENT_ID=<your_client_id> \
+    -e OAUTH2_CLIENT_SECRET=<your_client_secret> \
+    --name qgis-server \
+    elpaso/qgis-server:latest
+```
 
 # Example folder structure
 
