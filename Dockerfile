@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:xenial
 MAINTAINER Alessandro Pasotti<elpaso@itopen.it>
 
 ARG APT_CATCHER_IP=localhost
@@ -15,14 +15,18 @@ RUN  echo 'Acquire::http { Proxy "http://'${APT_CATCHER_IP}':3142"; };' >> /etc/
 # Add repository for QGIS
 ADD debian-gis.list /etc/apt/sources.list.d/debian-gis.list
 # Add the signing key
-RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key 3FF5FFCAD71472C4
+#RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 073D307A618E5811
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key 073D307A618E5811
 
 # Install required dependencies and QGIS itself
 RUN apt-get -y update
 RUN apt-get install --force-yes -y \
     vim \
-    python-qgis \
+    python-qgis-common \
+    qgis-python
+    qgis-providers \
     qgis-server \
+    qgis-plugin-grass \
     apache2 \
     libapache2-mod-fcgid \
     xvfb
@@ -56,6 +60,10 @@ ENV APACHE_DOCUMENTROOT /web/htdocs
 ADD setup.sh /usr/local/bin/setup.sh
 RUN chmod +x /usr/local/bin/setup.sh
 RUN /usr/local/bin/setup.sh
+
+# Configure WPS plugin
+ADD wps4qgis.cfg /etc/wps4qgis.cfg
+ENV PYWPS_CFG /etc/wps4qgis.cfg
 
 # Add start script
 ADD start.sh /usr/local/bin/start.sh

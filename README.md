@@ -16,7 +16,7 @@ apache reloading.
 
 *QGIS Server Browser* plugin is installed by deafult for a quick preview of layers.
 *QGIS Server OAuth* plugin is installed (not available in **CGI** mode), see [README](https://github.com/boundlessgeo/qgis-server-oauth2-auth-plugin/blob/master/README.rst) for details
-
+*QGIS Server WPS plugin is install and configured to serve all processing algorithms, models and scripts can be added to the exported volume
 
 # Building
 
@@ -82,6 +82,7 @@ web/
 │   └── qgis-fcgi.log
 ├── plugins            # Server plugins
 │   └── qgis-server-simple-browser-master
+├── wps                # WPS models and scripts
 └── projects           # QGIS projects
     ├── helloworld.qgs
     ├── world.dbf
