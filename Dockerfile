@@ -15,7 +15,6 @@ RUN  echo 'Acquire::http { Proxy "http://'${APT_CATCHER_IP}':3142"; };' >> /etc/
 # Add repository for QGIS
 ADD debian-gis.list /etc/apt/sources.list.d/debian-gis.list
 # Add the signing key
-#RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 073D307A618E5811
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key 073D307A618E5811
 
 # Install required dependencies and QGIS itself
@@ -23,7 +22,7 @@ RUN apt-get -y update
 RUN apt-get install --force-yes -y \
     vim \
     python-qgis-common \
-    qgis-python
+    python-qgis \
     qgis-providers \
     qgis-server \
     qgis-plugin-grass \

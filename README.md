@@ -81,7 +81,6 @@ web/
 │   ├── qgis-cgi.log
 │   └── qgis-fcgi.log
 ├── plugins            # Server plugins
-│   └── qgis-server-simple-browser-master
 ├── wps                # WPS models and scripts
 └── projects           # QGIS projects
     ├── helloworld.qgs

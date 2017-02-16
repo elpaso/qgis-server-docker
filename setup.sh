@@ -23,7 +23,9 @@ wget https://github.com/elpaso/qgis-wps4server/archive/master.zip
 unzip master.zip
 rm master.zip
 mkdir -p /web/htdocs/wps/tmp
-chown -R www-data /web/htdocs/wps 
+chown -R www-data /web/htdocs/wps
+# Directory for processing models and scripts
+mkdir -p /web/wps/{scripts,rscripts,models}
 
 # Fix permissions on certificates
 find /web -name 'cacert*' -exec chmod 0644 \{\} \;
