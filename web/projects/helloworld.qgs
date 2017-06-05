@@ -1,11 +1,14 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis projectname="" version="2.18.0">
+<qgis projectname="" version="2.18.9">
   <title></title>
   <autotransaction active="0"/>
   <evaluateDefaultValues active="0"/>
   <layer-tree-group expanded="1" checked="Qt::Checked" name="">
     <customproperties/>
-    <layer-tree-layer expanded="0" checked="Qt::Checked" id="world20160411143513939" name="world">
+    <layer-tree-layer expanded="1" providerKey="gdal" checked="Qt::Checked" id="bluemarble20170605181552156" source="/home/ale/dev/qgis-server-docker/web/projects/bluemarble.tiff" name="bluemarble">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="0" providerKey="ogr" checked="Qt::Checked" id="world20160411143513939" source="/home/ale/dev/qgis-server-docker/web/projects/world.shp" name="world">
       <customproperties/>
     </layer-tree-layer>
   </layer-tree-group>
@@ -13,10 +16,10 @@
   <mapcanvas>
     <units>degrees</units>
     <extent>
-      <xmin>-130.24568854931314377</xmin>
-      <ymin>-100.71435333872810247</ymin>
-      <xmax>247.75431145068685623</xmax>
-      <ymax>81.5391163112719255</ymax>
+      <xmin>-109.03622972529183244</xmin>
+      <ymin>-27.74810659273162372</ymin>
+      <xmax>79.96377027470816756</xmax>
+      <ymax>63.37862823226834763</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>0</projections>
@@ -38,9 +41,15 @@
   <layer-tree-canvas>
     <custom-order enabled="0">
       <item>world20160411143513939</item>
+      <item>bluemarble20170605181552156</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
+    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="bluemarble" showFeatureCount="0">
+      <filegroup open="true" hidden="false">
+        <legendlayerfile isInOverview="0" layerid="bluemarble20170605181552156" visible="1"/>
+      </filegroup>
+    </legendlayer>
     <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="world" showFeatureCount="0">
       <filegroup open="false" hidden="false">
         <legendlayerfile isInOverview="0" layerid="world20160411143513939" visible="1"/>
@@ -48,7 +57,54 @@
     </legendlayer>
   </legend>
   <projectlayers>
-    <maplayer simplifyAlgorithm="0" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" readOnly="0" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>-180</xmin>
+        <ymin>-90</ymin>
+        <xmax>180</xmax>
+        <ymax>90</ymax>
+      </extent>
+      <id>bluemarble20170605181552156</id>
+      <datasource>./bluemarble.tiff</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>bluemarble</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+        <noDataList bandNo="2" useSrcNoData="1"/>
+        <noDataList bandNo="3" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" blueBand="3" greenBand="2" type="multibandcolor" redBand="1">
+          <rasterTransparency/>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer simplifyAlgorithm="0" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>world20160411143513939</id>
       <datasource>./world.shp</datasource>
       <shortname>world</shortname>
@@ -69,17 +125,9 @@
         </spatialrefsys>
       </srs>
       <provider encoding="System">ogr</provider>
-      <previewExpression></previewExpression>
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
-      <defaults>
-        <default field="NAME" expression=""/>
-        <default field="CAPITAL" expression=""/>
-        <default field="APPROX" expression=""/>
-        <default field="AREA" expression=""/>
-        <default field="SOURCETHM" expression=""/>
-      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -4181,7 +4229,7 @@
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
-      <attributeactions default="0"/>
+      <attributeactions default="-1"/>
       <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
         <columns/>
       </attributetableconfig>
@@ -4213,6 +4261,14 @@ def my_form_open(dialog, layer, feature):
         <rowstyles/>
         <fieldstyles/>
       </conditionalstyles>
+      <defaults>
+        <default field="NAME" expression=""/>
+        <default field="CAPITAL" expression=""/>
+        <default field="APPROX" expression=""/>
+        <default field="AREA" expression=""/>
+        <default field="SOURCETHM" expression=""/>
+      </defaults>
+      <previewExpression></previewExpression>
     </maplayer>
   </projectlayers>
   <properties>
@@ -4278,15 +4334,25 @@ def my_form_open(dialog, layer, feature):
     </WFSLayersPrecision>
     <Digitizing>
       <DefaultSnapToleranceUnit type="int">1</DefaultSnapToleranceUnit>
-      <LayerSnappingList type="QStringList"/>
-      <LayerSnappingEnabledList type="QStringList"/>
+      <LayerSnappingList type="QStringList">
+        <value>world20160411143513939</value>
+      </LayerSnappingList>
+      <LayerSnappingEnabledList type="QStringList">
+        <value>enabled</value>
+      </LayerSnappingEnabledList>
       <SnappingMode type="QString">advanced</SnappingMode>
       <AvoidIntersectionsList type="QStringList"/>
-      <LayerSnappingToleranceUnitList type="QStringList"/>
-      <LayerSnapToList type="QStringList"/>
+      <LayerSnappingToleranceUnitList type="QStringList">
+        <value>1</value>
+      </LayerSnappingToleranceUnitList>
+      <LayerSnapToList type="QStringList">
+        <value>to_vertex_and_segment</value>
+      </LayerSnapToList>
       <DefaultSnapType type="QString">to vertex and segment</DefaultSnapType>
       <DefaultSnapTolerance type="double">10</DefaultSnapTolerance>
-      <LayerSnappingToleranceList type="QStringList"/>
+      <LayerSnappingToleranceList type="QStringList">
+        <value>10.000000</value>
+      </LayerSnappingToleranceList>
     </Digitizing>
     <Identify>
       <disabledLayers type="QStringList"/>
@@ -4295,7 +4361,9 @@ def my_form_open(dialog, layer, feature):
       <pythonCode type="QString"></pythonCode>
     </Macros>
     <WMSAccessConstraints type="QString">None</WMSAccessConstraints>
-    <WCSLayers type="QStringList"/>
+    <WCSLayers type="QStringList">
+      <value>bluemarble20170605181552156</value>
+    </WCSLayers>
     <Legend>
       <filterByMap type="bool">false</filterByMap>
     </Legend>
