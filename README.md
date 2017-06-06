@@ -18,8 +18,6 @@ apache reloading.
 
 *QGIS Server OAuth* plugin is installed (not available in **CGI** mode), see [README](https://github.com/boundlessgeo/qgis-server-oauth2-auth-plugin/blob/master/README.rst) for details
 
-*QGIS Server WPS* plugin is install and configured to serve all processing algorithms, models and scripts can be added to the exported volume
-
 *Customized GetFeatureInfo* response plugin add an HTML snippet to all responses. The main purpose of this is to allow testing of hyperlinks in the GetFeatureInfo response.
 
 

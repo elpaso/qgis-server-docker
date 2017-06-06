@@ -18,14 +18,16 @@ unzip master.zip
 rm master.zip
 mv qgis-server-simple-browser-master serversimplebrowser
 
-apt-get -y --force-yes install python-lxml
-wget https://github.com/elpaso/qgis-wps4server/archive/master.zip
-unzip master.zip
-rm master.zip
-mkdir -p /web/htdocs/wps/tmp
-chown -R www-data /web/htdocs/wps
+
+# Disabled because it crashes server in FCGI mode
+#apt-get -y --force-yes install python-lxml
+#wget https://github.com/elpaso/qgis-wps4server/archive/master.zip
+#unzip master.zip
+#rm master.zip
+#mkdir -p /web/htdocs/wps/tmp
+#chown -R www-data /web/htdocs/wps
 # Directory for processing models and scripts
-mkdir -p /web/wps/{scripts,rscripts,models}
+#mkdir -p /web/wps/{scripts,rscripts,models}
 
 # Fix permissions on certificates
 find /web -name 'cacert*' -exec chmod 0644 \{\} \;
