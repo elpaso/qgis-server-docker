@@ -38,7 +38,10 @@ ADD default.conf /etc/apache2/sites-enabled/000-default.conf
 # Volume
 ADD web /web
 
-RUN mkdir -p /web/plugins /web/projects /web/logs && chown -R www-data:www-data /web
+RUN mkdir -p /web/plugins/getfeatureinfo /web/projects /web/logs && chown -R www-data:www-data /web
+
+# Add getfeatureinfo plugin
+ADD web/plugins/getfeatureinfo /web/plugins/getfeatureinfo
 
 # Creates the CGI endpoint
 RUN cd /usr/lib/cgi-bin/ && ln -s qgis_mapserv.fcgi qgis_mapserv.cgi

@@ -15,8 +15,13 @@ apache reloading.
 **WFS-T** is enabled (no authentication required).
 
 *QGIS Server Browser* plugin is installed by deafult for a quick preview of layers.
+
 *QGIS Server OAuth* plugin is installed (not available in **CGI** mode), see [README](https://github.com/boundlessgeo/qgis-server-oauth2-auth-plugin/blob/master/README.rst) for details
-*QGIS Server WPS plugin is install and configured to serve all processing algorithms, models and scripts can be added to the exported volume
+
+*QGIS Server WPS* plugin is install and configured to serve all processing algorithms, models and scripts can be added to the exported volume
+
+*Customized GetFeatureInfo* response plugin add an HTML snippet to all responses. The main purpose of this is to allow testing of hyperlinks in the GetFeatureInfo response.
+
 
 # Building
 
@@ -65,9 +70,7 @@ docker run -d \
 
 The `/web` example folder contains:
 
-* the *QGIS Server Browser* plugin, that provides a simple project browser (see: http://www.itopen.it/qgis-server-simple-browser-plugin/).
 * the QGIS project **helloworld** with all its data
-
 
 The provided example `/web` folder structure is:
 
@@ -80,10 +83,15 @@ web/
 │   ├── error.log
 │   ├── qgis-cgi.log
 │   └── qgis-fcgi.log
-├── plugins            # Server plugins
 ├── wps                # WPS models and scripts
+├── plugins            # Server plugins (oauth2 and simple server are installed by the install script)
+│   └── getfeatureinfo    
+│       ├── getfeatureinfo.py     
+│       ├── __init__.py     
+│       └── metadata.txt     
 └── projects           # QGIS projects
     ├── helloworld.qgs
+    ├── bluemarble.tiff
     ├── world.dbf
     ├── world.prj
     ├── world.qix
