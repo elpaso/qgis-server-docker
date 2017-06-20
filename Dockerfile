@@ -30,18 +30,13 @@ RUN apt-get install --force-yes -y \
     libapache2-mod-fcgid \
     xvfb
 
-EXPOSE 80
+EXPOSE 80 8082
 
 # Default web configuration, enables CGI, FastCGI and htdocs
 ADD default.conf /etc/apache2/sites-enabled/000-default.conf
 
 # Volume
 ADD web /web
-
-RUN mkdir -p /web/plugins/getfeatureinfo /web/projects /web/logs && chown -R www-data:www-data /web
-
-# Add getfeatureinfo plugin
-ADD web/plugins/getfeatureinfo /web/plugins/getfeatureinfo
 
 # Creates the CGI endpoint
 RUN cd /usr/lib/cgi-bin/ && ln -s qgis_mapserv.fcgi qgis_mapserv.cgi
@@ -63,9 +58,9 @@ ADD setup.sh /usr/local/bin/setup.sh
 RUN chmod +x /usr/local/bin/setup.sh
 RUN /usr/local/bin/setup.sh
 
-# Configure WPS plugin
-ADD wps4qgis.cfg /etc/wps4qgis.cfg
-ENV PYWPS_CFG /etc/wps4qgis.cfg
+# OAuth2
+ADD qgis_oauth2_wrapped_server.py /web
+ADD run_oauth2.sh /web
 
 # Add start script
 ADD start.sh /usr/local/bin/start.sh
