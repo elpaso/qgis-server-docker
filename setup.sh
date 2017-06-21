@@ -22,3 +22,5 @@ sed -i -e 's/grass7Name/grassName/' /usr/share/qgis/python/plugins/processing/al
 
 # OAuth  plugin
 pip install oauthlib
+
+chmod -R 777 /web

@@ -39,7 +39,7 @@ __revision__ = '$Format:%H$'
 
 
 
-QGIS_SERVER_PORT = int(os.environ.get('QGIS_SERVER_PORT', '8082'))
+QGIS_SERVER_PORT = int(os.environ.get('QGIS_SERVER_PORT', '8083'))
 #QGIS_SERVER_HOST = os.environ.get('QGIS_SERVER_HOST', '127.0.0.1')
 QGIS_SERVER_HOST = '' # listen an all interfaces
 
@@ -55,6 +55,7 @@ QGIS_SERVER_OAUTH2_TOKEN_EXPIRES_IN = os.environ.get(
     'QGIS_SERVER_OAUTH2_TOKEN_EXPIRES_IN', 3600)
 
 
+print("SERVER_NAME (from env, will be used fo urls): %s" % os.environ.get('SERVER_NAME'))
 print("OAuth2 username: %s" % QGIS_SERVER_OAUTH2_USERNAME)
 print("OAuth2 password: %s" % QGIS_SERVER_OAUTH2_PASSWORD)
 
@@ -214,7 +215,7 @@ class Handler(BaseHTTPRequestHandler):
             #print('Setting ENV var %s to %s' % ('HTTP_%s' % k.replace(' ', '-').replace('-', '_').replace(' ', '-').upper(), v))
             qgs_server.putenv('HTTP_%s' % k.replace(' ', '-').replace('-', '_').replace(' ', '-').upper(), v)
         qgs_server.putenv('SERVER_PORT', str(self.server.server_port))
-        qgs_server.putenv('SERVER_NAME', self.server.server_name)
+        qgs_server.putenv('SERVER_NAME', os.environ.get('SERVER_NAME' ,self.server.server_name))
         qgs_server.putenv('REQUEST_URI', self.path)
         if data is not None:
             qgs_server.putenv('REQUEST_BODY', data)

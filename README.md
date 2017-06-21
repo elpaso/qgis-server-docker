@@ -37,10 +37,10 @@ $ docker build -t qgis-server --build-arg APT_CATCHER_IP=$ADDR .
 
 # Running
 
-To run a container, assuming that you want it available on host port 8081 (and OAuth2 on 8082) do:
+To run a container, assuming that you want it available on host port 8081 (and OAuth2 on 8083) do:
 
 ```
-$ docker run -p 8081:80 -p 8082:8082 -it -h qgis.boundless.test --name qgis-server qgis-server
+$ docker run -p 8081:80 -p 8083:8083 -it -h qgis.boundless.test --name qgis-server qgis-server
 ```
 
 You might want to mount the `/web` folder as a local volume that contains your
@@ -70,14 +70,14 @@ docker run -d \
 
 ### QGIS Server
 
-In order to test OAuth2 resource owner grant flow, a Python script that relies on QGIS Server is listening on container port `8082` (mapped to host port `8083`).
+In order to test OAuth2 resource owner grant flow, a Python script that relies on QGIS Server is listening on container port `8083`.
 
-**Note**: this functionality requires an hostname set in the container.
+**Note**: this functionality requires an hostname set in the container (use `-h <your_hostname>` when launching the container).
 
 In order to connect to the OAuth2 endpoint you must pass `oauth2=true` in the URL,
 for example:
 
-(http://qgis.boundless.test:8082/oauth2=true&MAP=/web/projects/helloworld.qgs&SERVICE=WMS&REQUEST=GetCapabilities).
+(http://qgis.boundless.test:8083/oauth2=true&MAP=/web/projects/helloworld.qgs&SERVICE=WMS&REQUEST=GetCapabilities).
 
 #### OAuth2 client configuration
 
@@ -133,7 +133,7 @@ http://localhost:8081/cgi-bin/qgis_mapserv.fcgi?MAP=/web/projects/helloworld.qgs
 ## CGI, example project
 http://localhost:8081/cgi-bin/qgis_mapserv.cgi?MAP=/web/projects/helloworld.qgs&SERVICE=WMS&REQUEST=GetProjectsettings
 ## FastCGI example project, OAuth2 resource owner enabled
-http://localhost:8082/?oauth2=true&MAP=/web/projects/helloworld.qgs&SERVICE=WMS&REQUEST=GetProjectsettings
+http://localhost:8083/?oauth2=true&MAP=/web/projects/helloworld.qgs&SERVICE=WMS&REQUEST=GetProjectsettings
 
 
 

@@ -5,10 +5,10 @@
   <evaluateDefaultValues active="0"/>
   <layer-tree-group expanded="1" checked="Qt::Checked" name="">
     <customproperties/>
-    <layer-tree-layer expanded="1" providerKey="gdal" checked="Qt::Checked" id="bluemarble20170605181552156" source="/home/ale/dev/qgis-server-docker/web/projects/bluemarble.tiff" name="bluemarble">
+    <layer-tree-layer expanded="0" providerKey="ogr" checked="Qt::Checked" id="world20160411143513939" source="./world.shp" name="world">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="0" providerKey="ogr" checked="Qt::Checked" id="world20160411143513939" source="/home/ale/dev/qgis-server-docker/web/projects/world.shp" name="world">
+    <layer-tree-layer expanded="1" providerKey="gdal" checked="Qt::Checked" id="bluemarble20170605181552156" source="./bluemarble.tiff" name="bluemarble">
       <customproperties/>
     </layer-tree-layer>
   </layer-tree-group>
@@ -45,14 +45,14 @@
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
-    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="bluemarble" showFeatureCount="0">
-      <filegroup open="true" hidden="false">
-        <legendlayerfile isInOverview="0" layerid="bluemarble20170605181552156" visible="1"/>
-      </filegroup>
-    </legendlayer>
     <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="world" showFeatureCount="0">
       <filegroup open="false" hidden="false">
         <legendlayerfile isInOverview="0" layerid="world20160411143513939" visible="1"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="bluemarble" showFeatureCount="0">
+      <filegroup open="true" hidden="false">
+        <legendlayerfile isInOverview="0" layerid="bluemarble20170605181552156" visible="1"/>
       </filegroup>
     </legendlayer>
   </legend>
@@ -4329,7 +4329,6 @@ def my_form_open(dialog, layer, feature):
       <CanvasColorBluePart type="int">255</CanvasColorBluePart>
     </Gui>
     <WFSLayersPrecision>
-      <world20140813212544714 type="int">8</world20140813212544714>
       <world20160411143513939 type="int">8</world20160411143513939>
     </WFSLayersPrecision>
     <Digitizing>
@@ -4360,7 +4359,7 @@ def my_form_open(dialog, layer, feature):
     <Macros>
       <pythonCode type="QString"></pythonCode>
     </Macros>
-    <WMSAccessConstraints type="QString">None</WMSAccessConstraints>
+    <WMSAccessConstraints type="QString">intellectualPropertyRights</WMSAccessConstraints>
     <WCSLayers type="QStringList">
       <value>bluemarble20170605181552156</value>
     </WCSLayers>
