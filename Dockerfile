@@ -15,6 +15,7 @@ RUN apt-get -y update && apt-get -y upgrade
 RUN apt-get install --force-yes -y \
     vim \
     qgis-server \
+    python3-qgis \
     apache2 \
     libapache2-mod-fcgid \
     xvfb

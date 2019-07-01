@@ -1,0 +1,59 @@
+FROM ubuntu:xenial
+MAINTAINER Alessandro Pasotti<elpaso@itopen.it>
+
+RUN chmod 777 /tmp && apt-get -y update && apt-get install --force-yes -y ca-certificates dirmngr
+
+# Add repository for QGIS
+RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get -y install -y apt-transport-https software-properties-common
+
+# Use ubuntugis on xenial
+RUN add-apt-repository ppa:ubuntugis/ubuntugis-unstable
+
+# Add the signing key
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key CAEB3DC3BDF7FB45
+
+# Install required dependencies and QGIS itself
+RUN apt-get -y update && apt-get install \
+    --force-yes -y \
+    vim \
+    apache2 \
+    libapache2-mod-fcgid \
+    xvfb
+
+RUN apt install \
+    --option Acquire::Retries=100 \
+    --option Acquire::http::Timeout="60" \
+    -y \
+    qgis-server
+
+RUN apt install \
+    --option Acquire::Retries=100 \
+    --option Acquire::http::Timeout="60" \
+    -y \
+    python3-qgis
+
+# Fix QFontDatabase: Cannot find font directory /usr/lib/x86_64-linux-gnu/fonts - is Qt installed correctly?
+RUN ln -s /usr/share/fonts/truetype/ /usr/lib/x86_64-linux-gnu/fonts
+
+# Clean
+RUN apt-get -y clean && rm -rf /var/lib/apt/lists/*
+
+# Add start script
+ADD start_apache.sh /usr/local/bin/start_apache.sh
+RUN chmod +x /usr/local/bin/start.sh
+
+# Default web configuration, enables CGI, FastCGI and htdocs
+ADD default.conf /etc/apache2/sites-enabled/000-default.conf
+
+# Enable all required apache modules
+RUN a2enmod rewrite && a2enmod fcgid && a2enmod headers
+
+RUN mkdir -p /var/www/.local/share/QGIS/QGIS3/profiles/default/cache
+
+ENV APACHE_DOCUMENTROOT /var/www
+
+EXPOSE 80
+
+# Start
+CMD /usr/local/bin/start_apache.sh
