@@ -1,18 +1,19 @@
-FROM ubuntu:bionic
+FROM ubuntu:focal
 MAINTAINER Alessandro Pasotti<elpaso@itopen.it>
 
-ARG APT_CATCHER_IP=localhost
+ENV DEBIAN_FRONTEND noninteractive
 
-RUN chmod 777 /tmp && apt-get -y update && apt-get install --force-yes -y ca-certificates dirmngr
+RUN chmod 777 /tmp && apt-get -y update && apt-get install --force-yes -y wget ca-certificates dirmngr gnupg
 
 # Add repository for QGIS
-ADD debian-gis.list /etc/apt/sources.list.d/debian-gis.list
-# Add the signing key
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key CAEB3DC3BDF7FB45
+RUN wget -qO - https://qgis.org/downloads/qgis-2020.gpg.key | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import && \
+    chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
+
+ADD qgis-ubuntu.list /etc/apt/sources.list.d/qgis-ubuntu.list
 
 # Install required dependencies and QGIS itself
 RUN apt-get -y update && apt-get -y upgrade
-RUN apt-get install --force-yes -y \
+RUN apt-get install --no-install-recommends --force-yes -y \
     vim \
     qgis-server \
     python3-qgis \
@@ -21,22 +22,21 @@ RUN apt-get install --force-yes -y \
     xvfb
 
 
-# Default web configuration, enables CGI, FastCGI and htdocs
+# Default web configuration FastCGI and htdocs
 ADD default.conf /etc/apache2/sites-enabled/000-default.conf
 
 # Enable all required apache modules
 RUN a2enmod rewrite && a2enmod fcgid && a2enmod headers
 
-ENV APACHE_DOCUMENTROOT /var/www
-
 # Add start script
-ADD start.sh /usr/local/bin/start.sh
-RUN chmod +x /usr/local/bin/start.sh
+ADD start_apache.sh /usr/local/bin/start_apache.sh
+RUN chmod +x /usr/local/bin/start_apache.sh
+
+# Add test project
+COPY qgis_projects /qgis_projects
 
 # Clean
 RUN apt-get -y clean && rm -rf /var/lib/apt/lists/*
 
-EXPOSE 80 8082
-
 # Start
-CMD /usr/local/bin/start.sh
+CMD /usr/local/bin/start_apache.sh

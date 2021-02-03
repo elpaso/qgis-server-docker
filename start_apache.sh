@@ -8,7 +8,4 @@ if [ -f /var/run/apache2.pid ]; then
     rm -f /var/run/apache2.pid
 fi
 
-/usr/bin/Xvfb :99 -screen 0 1024x768x24 -ac +extension GLX +render -noreset -nolisten tcp &
-
-# Start apache
-apachectl -D FOREGROUND
+/usr/bin/xvfb-run -n 99 -s "-screen 0 1024x768x24 -ac +extension GLX +render -noreset -nolisten tcp" apachectl -D FOREGROUND

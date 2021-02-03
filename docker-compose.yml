@@ -1,0 +1,11 @@
+
+
+services:
+  qgis-server:
+    image: "elpaso/qgis-server:latest"
+    build: .
+    ports:
+      - "8082:80"
+    volumes:
+      - ./qgis_projects:/qgis_projects
+

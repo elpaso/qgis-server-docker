@@ -1,0 +1,2 @@
+# Ubuntu GIS focal
+deb [arch=amd64] https://qgis.org/ubuntu focal main
